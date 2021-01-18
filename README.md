@@ -38,7 +38,7 @@ Podemos elegir en que idioma se descargará el código de Wordpress con el sigui
 
 >wp core download --locale=es_ES
 
-Al final del comando hay que añadir el flag --allow-root, de tal forma que el comando sea "wp core download (--locales=es_ES) --allow-root" dado que sin el flag se le deniega el acceso a la herramienta.
+Al final del comando hay que añadir el flag --allow-root, de tal forma que el comando sea "wp core download (--locale=es_ES) --allow-root" dado que sin el flag se le deniega el acceso a la herramienta.
 
 Con este comando Wordpress se descargará en español.
 
