@@ -9,8 +9,8 @@ DB_PASSWORD=wordpress_password
 IP_PRIVADA=localhost
 
 # Variables de sitio Wordpress
-WP_URL=34.224.169.94
-WP-ADMIN=wp_admin
+WP_URL=ip_publica
+WP_ADMIN=wp_admin
 WP_ADMIN_PASS=wp_admin_password
 WP_NAME=sitio_wordpress
 WP_ADMIN_EMAIL=adminmail@blackhole.lol
@@ -22,7 +22,16 @@ set -x
 apt update -y
 
 # Actualizar el sistema
-apt upgrade -y
+#apt upgrade -y
+
+# Instalar pila lamp
+apt install apache2 -y
+apt install mysql-server -y
+apt install php libapache2-mod-php php-mysql -y
+
+# Configurar root mysql
+mysql -u root -proot <<< "ALTER USER '$ROOT_MYSQL'@'localhost' IDENTIFIED WITH caching_sha2_password BY '$CLAVE_MYSQL';"
+mysql -u root -proot <<< "FLUSH PRIVILEGES;"
 
 # Descargar archivo wp-cli.phar
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -44,7 +53,7 @@ mysql -u $ROOT_MYSQL -p$CLAVE_MYSQL <<< "DROP DATABASE IF EXISTS $DB_NAME;"
 mysql -u $ROOT_MYSQL -p$CLAVE_MYSQL <<< "CREATE DATABASE $DB_NAME;"
 
 # Crear usuario para la base de datos de Wordpress
-mysql -u $ROOT_MYSQL -p$CLAVE_MYSQL <<< "DROP USER '$DB_USER'@'$IP_PRIVADA';"
+mysql -u $ROOT_MYSQL -p$CLAVE_MYSQL <<< "DROP USER IF EXISTS '$DB_USER'@'$IP_PRIVADA';"
 mysql -u $ROOT_MYSQL -p$CLAVE_MYSQL <<< "CREATE USER '$DB_USER'@'$IP_PRIVADA' IDENTIFIED WITH caching_sha2_password BY '$DB_PASSWORD';"
 mysql -u $ROOT_MYSQL -p$CLAVE_MYSQL <<< "GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'$IP_PRIVADA';"
 mysql -u $ROOT_MYSQL -p$CLAVE_MYSQL <<< "FLUSH PRIVILEGES;"
