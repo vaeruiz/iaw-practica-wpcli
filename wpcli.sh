@@ -9,7 +9,7 @@ DB_PASSWORD=wordpress_password
 IP_PRIVADA=localhost
 
 # Variables de sitio Wordpress
-WP_URL=ip_publica
+WP_URL=184.73.107.188
 WP_ADMIN=wp_admin
 WP_ADMIN_PASS=wp_admin_password
 WP_NAME=sitio_wordpress
@@ -63,3 +63,6 @@ wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASSWORD --all
 
 # Crear sitio Wordpress
 wp core install --url=$WP_URL --title="$WP_NAME" --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL --allow-root
+
+# Cambiar el grupo del directorio de wp
+chown -R www-data:www-data /var/www/html
