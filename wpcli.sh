@@ -64,5 +64,6 @@ wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASSWORD --all
 # Crear sitio Wordpress
 wp core install --url=$WP_URL --title="$WP_NAME" --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL --allow-root
 
-# Cambiar el grupo del directorio de wp
+# Cambiar permisos de wp-content y el grupo del directorio de wp
+chmod -R 775 wp-content
 chown -R www-data:www-data /var/www/html
