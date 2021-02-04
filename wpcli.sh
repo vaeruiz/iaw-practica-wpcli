@@ -67,3 +67,6 @@ wp core install --url=$WP_URL --title="$WP_NAME" --admin_user=$WP_ADMIN --admin_
 # Cambiar permisos de wp-content y el grupo del directorio de wp
 chmod -R 775 wp-content
 chown -R www-data:www-data /var/www/html
+
+# Eliminar index.html de apache
+rm /var/www/html/index.html
